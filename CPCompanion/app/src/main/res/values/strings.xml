@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CP Companion</string>
+    <string name="contests">Contests</string>
+    <string name="problems">Problems</string>
 </resources>

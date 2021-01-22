@@ -11,7 +11,7 @@ interface ClistApi {
 
     @GET("/api/v1/contest/")
     suspend fun getContestDetails(
-        @Query("limit") limit: Int = 30,
+        @Query("pgNo") pgNo: Int = 1,
         @Query("username") userName: String = USERNAME,
         @Query("api_key") apiKey: String = API_KEY
     ): Response<ContestResponse>

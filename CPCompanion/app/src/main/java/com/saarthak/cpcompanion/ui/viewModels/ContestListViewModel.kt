@@ -13,12 +13,17 @@ import com.saarthak.cpcompanion.repository.ContestRepo
 import com.saarthak.cpcompanion.util.CPApplication
 import com.saarthak.cpcompanion.util.Resource
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class ContestListViewModel(val app: Application, val contestRepo: ContestRepo): AndroidViewModel(app) {
 
     val contestDetails: MutableLiveData<Resource<ContestResponse>> = MutableLiveData()
     var contestResponse: ContestResponse? = null
-    var limit = 30
+    var curPg = 1
+
+    init {
+        getContestList()
+    }
 
     private fun hasInternetConnection(): Boolean{
         val connectivityManager = getApplication<CPApplication>().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -49,6 +54,33 @@ class ContestListViewModel(val app: Application, val contestRepo: ContestRepo): 
     }
 
     fun getContestList() = viewModelScope.launch {
+        contestDetails.postValue(Resource.Loading())
+        try {
+            if(hasInternetConnection()){
+                val response = contestRepo.getContestDetails(curPg)
+                processContestList(response)
+            }
+            else contestDetails.postValue(Resource.Error("No Internet Connection !"))
+        } catch (t: Throwable){
+            contestDetails.postValue(Resource.Error("Something went wrong ! Please try again later."))
+        }
+    }
 
+    private fun processContestList(response: Response<ContestResponse>): Resource<ContestResponse>{
+        if(response.isSuccessful){
+            response.body()?.let {
+                ++curPg
+                if(contestResponse == null) contestResponse = it
+                else{
+                    val prevResponse = contestResponse?.contests
+                    val newResponse = it.contests
+                    prevResponse?.addAll(newResponse)
+                }
+
+                return Resource.Success(contestResponse ?: it)
+            }
+        }
+
+        return Resource.Error(response.message())
     }
 }
