@@ -1,6 +1,5 @@
 const codeforces = require('./cfContests')
 const leetcode = require('./lcContests')
-//var contests;
 const contestsAdder = async (channel,api) => {
     var contests = []
     try{
@@ -22,14 +21,13 @@ const contestsAdder = async (channel,api) => {
 }
 
 const contestsThrower = async ()=>{
-    var contestsObj = {cdf: null, lcf: null}
+    var contestsObj = {codeforces: null, leetcode: null}
     const cfAPI = 'https://codeforces.com/api/contest.list'
     const lcAPI = 'https://leetcode.com/graphql'
     var cdfp = await contestsAdder(codeforces,cfAPI)
     var lcfp = await contestsAdder(leetcode,lcAPI)
-    contestsObj.cdf = cdfp
-    contestsObj.lcf = lcfp
-    console.log('here: ' + contestsObj)
+    contestsObj.codeforces = cdfp
+    contestsObj.leetcode = lcfp
     return contestsObj
 }
 

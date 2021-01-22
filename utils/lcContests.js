@@ -26,27 +26,20 @@ const leetcode = async (apiAddress) => {
         }
            let response = await axios.post(apiAddress, body, options)
               
-            //console.log(response.data.data) //****console log statement****
-            
-            
                 const obj = response.data.data.allContests                
                 for(var i=0; i<obj.length; ++i){
      
                     var timestamp = getTheTime(obj[i].startTime)
+                    const currentTime = (Date.now() / 1000) 
                     
-                    const currentTime = Date.now()
-                    console.log('current: ' + currentTime)
-                    
-                    console.log('start: ' + obj[i].startTime + ': ' + timestamp.start) //~bug
-                    
-                    if(1){ //condotion pending ~bug
+                    if(currentTime < obj[i].startTime){ 
                         contests.push({
                             platform: 'leetcode',
                             title: obj[i].title,
                             url: 'https://leetcode.com/contest/' + obj[i].titleSlug,
                             duration: obj[i].duration/60, //in minutes
                             date: timestamp.date,
-                            start: timestamp.start,
+                            start: timestamp.time,
                             phase: '',
                             page: 0
                         })
