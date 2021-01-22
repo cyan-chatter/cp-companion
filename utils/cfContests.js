@@ -33,7 +33,8 @@ const codeforces = async (apiAddress) => {
                             duration: obj[i].durationSeconds/60, //in minutes
                             date: timestamp.date,
                             start: timestamp.start,
-                            phase: obj[i].phase
+                            phase: obj[i].phase,
+                            page: 0
                         })
                     }
                 }
