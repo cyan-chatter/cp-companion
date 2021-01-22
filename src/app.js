@@ -6,15 +6,13 @@ app.use(express.json())
 const cookieParser= require('cookie-parser')
 const bodyParser = require('body-parser')
 
-port = 3000
-
 const contests = require('./routers/contests')
 app.use(contests)
 
 app.get('/',(req,res)=>{
-    res.send("Best of luck")
+    res.send("Code Companion")
 })
-
-app.listen(port , ()=> {
-    console.log('Starting Server on Port '+port )
+const port = process.env.PORT || 3000
+app.listen(port, ()=> {
+    console.log('Starting Server on Port '+ port)
 })
