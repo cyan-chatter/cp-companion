@@ -25,7 +25,7 @@ class RetrofitInstance {
         }
 
         val api by lazy {
-            retrofit.create(ClistApi::class.java)
+            retrofit.create(CodeCompanionApi::class.java)
         }
     }
 }

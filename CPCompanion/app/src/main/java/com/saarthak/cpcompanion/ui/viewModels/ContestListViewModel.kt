@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -23,6 +24,10 @@ class ContestListViewModel(val app: Application, val contestRepo: ContestRepo): 
 
     init {
         getContestList()
+    }
+
+    companion object{
+        const val TAG = "viewModel"
     }
 
     private fun hasInternetConnection(): Boolean{
@@ -57,8 +62,9 @@ class ContestListViewModel(val app: Application, val contestRepo: ContestRepo): 
         contestDetails.postValue(Resource.Loading())
         try {
             if(hasInternetConnection()){
+                Log.d(TAG, "getContestList: internet active")
                 val response = contestRepo.getContestDetails(curPg)
-                processContestList(response)
+                contestDetails.postValue(processContestList(response))
             }
             else contestDetails.postValue(Resource.Error("No Internet Connection !"))
         } catch (t: Throwable){
@@ -68,7 +74,9 @@ class ContestListViewModel(val app: Application, val contestRepo: ContestRepo): 
 
     private fun processContestList(response: Response<ContestResponse>): Resource<ContestResponse>{
         if(response.isSuccessful){
+            Log.d(TAG, "processContestList: successful response")
             response.body()?.let {
+                Log.d(TAG, "processContestList: $curPg")
                 ++curPg
                 if(contestResponse == null) contestResponse = it
                 else{
@@ -77,6 +85,7 @@ class ContestListViewModel(val app: Application, val contestRepo: ContestRepo): 
                     prevResponse?.addAll(newResponse)
                 }
 
+                println(contestResponse)
                 return Resource.Success(contestResponse ?: it)
             }
         }

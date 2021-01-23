@@ -43,33 +43,33 @@
 
             <TextView
                 android:id="@+id/date_tv"
-                android:textSize="18sp"
-                android:textAlignment="center"
-                tools:text="22/01/21"
-                android:padding="3dp"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:layout_height="wrap_content"/>
+                android:padding="3dp"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                tools:text="22-01-2021" />
 
-            <ImageButton
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/downB"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="0.5"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_arrow__down_24" />
+                android:background="@drawable/ic_arrow__down_24" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_gravity="start"
-            android:visibility="gone"
-            tools:visibility="visible"
-            android:layout_marginStart="45dp"
+            android:id="@+id/details_ll"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="25dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -77,9 +77,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:visibility="gone"
-                tools:visibility="visible">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -100,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
                         android:padding="2dp"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         tools:text="Codeforces" />
 
                 </LinearLayout>
@@ -113,9 +111,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:visibility="gone"
-                tools:visibility="visible">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -136,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
                         android:padding="2dp"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         tools:text="8:05 pm" />
 
                 </LinearLayout>
@@ -149,9 +145,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:visibility="gone"
-                tools:visibility="visible">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -172,7 +166,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
                         android:padding="2dp"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         tools:text="2 hrs" />
 
                 </LinearLayout>
@@ -185,9 +179,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:visibility="gone"
-                tools:visibility="visible">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -208,7 +200,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
                         android:padding="2dp"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         tools:text="codeforces.com" />
 
                 </LinearLayout>

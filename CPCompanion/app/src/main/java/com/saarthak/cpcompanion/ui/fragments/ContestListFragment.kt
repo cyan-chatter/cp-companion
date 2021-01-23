@@ -26,6 +26,10 @@ class ContestListFragment: Fragment(R.layout.fragment_contest_list) {
     var isLastPg = false
     var isScrolling = false
 
+    companion object{
+        const val TAG = "contestListFragment"
+    }
+
     val scrollListener = object: RecyclerView.OnScrollListener(){
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
@@ -67,10 +71,13 @@ class ContestListFragment: Fragment(R.layout.fragment_contest_list) {
         setUpRv()
 
         viewModel.contestDetails.observe(viewLifecycleOwner, { response ->
-            when(response){
+            Log.d(TAG, "onViewCreated: contestDetails.observe")
+            when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
+                    Log.d(TAG, "onViewCreated: response success !")
                     response.data?.let { contestResponse ->
+                        Log.d(TAG, "onViewCreated: pagination started")
                         contestListAdapter.differ.submitList(contestResponse.contests)
 
                         val totalPgs = contestResponse.totalCount / PG_SZ + 2
@@ -84,12 +91,13 @@ class ContestListFragment: Fragment(R.layout.fragment_contest_list) {
                     hideProgressBar()
 
                     response.msg?.let {
-//                        Log.d(TAG, "error: $it")
+                        Log.d(TAG, "error: $it")
                         Toast.makeText(activity, "Error : $it", Toast.LENGTH_LONG).show()
                     }
                 }
 
                 is Resource.Loading -> {
+                    Log.d(TAG, "onViewCreated: loading....")
                     showProgressBar()
                 }
             }
@@ -107,8 +115,9 @@ class ContestListFragment: Fragment(R.layout.fragment_contest_list) {
     }
 
     private fun setUpRv(){
-        contestListAdapter = ContestListAdapter()
+        contestListAdapter = ContestListAdapter(requireContext())
 
+        Log.d(TAG, "setUpRv: adapter")
         rvContestList.apply {
             adapter = contestListAdapter
             layoutManager = LinearLayoutManager(activity)
