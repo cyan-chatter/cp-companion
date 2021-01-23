@@ -5,11 +5,12 @@ const getContests = require('../../utils/contestsThrower')
 
 const routeHandler = {
     loadContestsList : async (req,res)=>{
-        const contests = await getContests()   
+        var page = req.params.page
+        const contests = await getContests(page)   
         res.send(contests)
     }
 }
 
-router.get('/contests',routeHandler.loadContestsList)
+router.get('/contests/:page',routeHandler.loadContestsList)
 
 module.exports = router
