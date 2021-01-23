@@ -97,6 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
+                        android:textAllCaps="true"
                         android:padding="2dp"
                         android:textSize="16sp"
                         tools:text="Codeforces" />
@@ -200,6 +201,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
                         android:padding="2dp"
+                        android:autoLink="web"
                         android:textSize="16sp"
                         tools:text="codeforces.com" />
 
