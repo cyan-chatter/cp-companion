@@ -6,4 +6,4 @@
 
 ### Sidenote:
 - The server created for the application can be interacted by creating appropriate requests on: **https://contestsrunning.now.sh/contests**
-
+- Currently, the frontend and backend codes reside in different github branches which are not merged yet. The backend code resides in branch : main while the frontend code resides in branch : AppInit
